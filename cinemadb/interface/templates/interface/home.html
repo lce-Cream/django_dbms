@@ -1,0 +1,35 @@
+{% extends "interface/base.html" %}
+{% block content %}
+<header id="navbar">
+    <div class="container">
+        <ul>
+            <li><a href="/lab5">movies</a></li>
+            <li><a href="/lab6">users</a></li>
+            <li><a href="/lab7">halls</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+    
+    <!-- <table style="width:35%; padding: 15px; text-align: left; border: 1px solid black;">
+        <tr>
+            <th>Id</th>
+            <th>Fio</th>
+            <th>Group</th>
+            <th>Department</th>
+        </tr>
+
+            {% for student in student_list %}
+                <tr>
+                    <td> {{student.id}} </td>
+                    <td> {{student.fio}} </td>
+                    <td> {{student.group}} </td>
+                    <td> {{student.department}} </td>
+                    <td> <a href="{% url 'lab5.delete' student.id %}">delete</a> </td>
+                </tr>
+            {% endfor %}
+    </table> -->
+</div>
+
+{% endblock content %}

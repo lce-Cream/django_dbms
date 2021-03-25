@@ -1,0 +1,47 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:1.6em;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+	color: #333;
+	background: #fff;
+}
+
+a{
+	text-decoration: none; 
+	color: blue; 	   
+}
+
+.container{
+	width:80%;
+	margin:auto;
+	overflow:auto;
+}
+
+#main-header{
+	background: #417690;
+    color: #ffc;
+}
+
+#navbar{
+	background-color: #447e9b;
+	color: #fff;
+}
+
+#navbar ul{
+	padding:0;
+	list-style: none;
+}
+
+#navbar li{
+	display:inline;
+}
+
+#navbar a{
+	color:#fff;
+	text-decoration: none;
+	font-size:18px;
+	padding-right:15px;
+}
