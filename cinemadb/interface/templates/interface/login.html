@@ -1,0 +1,38 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{tab_title}}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    </head>
+
+    <body>
+        <nav id="main-header">
+            <div class="container">
+                <a href="{% url 'page.home' %}">cinemaDB</a>
+            </div>
+        </nav>
+
+        <header id="navbar">
+            <div class="container">
+                <h2>log in</h2>
+            </div>
+        </header>
+
+        <div class="container">
+            <form action='', method = "POST", autocomplete="off"> 
+                <br/>
+                {% csrf_token %} 
+                <input type="text" placeholder="username" name="username">
+                <input type="password" placeholder="password" name="password">
+                <input type="submit" value="log in">
+            </form>
+            {% if error %}
+            <h2>incorrect username or password</h2>
+            {% endif %}
+        </div>
+    </body>
+</html>
+

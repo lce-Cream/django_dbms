@@ -1,0 +1,28 @@
+{% extends "interface/base.html" %}
+{% block content %}
+
+<div class="container">
+    <table style="width:35%; padding: 15px; text-align: left; border: 1px solid black;">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Ganre</th>
+        </tr>
+        {% for movie in movie_list %}
+        <tr>
+            <td> {{movie.id}} </td>
+            <td> {{movie.name}} </td>
+            <td> {{movie.duration}} </td>
+            <td> {{movie.ganre}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="sidebar">
+    <form action="">
+        <input type="submit" value="add new"/>
+    </form>
+</div>
+{% endblock content %}

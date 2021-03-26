@@ -11,9 +11,22 @@
     <body>
         <nav id="main-header">
             <div class="container">
-                <h1>cinemaDB</h1>
+                <a style="padding: px; font-size: larger;" href="{% url 'page.movies' %}">cinemaDB</a>
             </div>
         </nav>
+
+        <header id="navbar">
+            <div class="container">
+                <ul>
+                    <li><a href="/movies">movies</a></li>
+                    <li><a href="/halls">halls</a></li>
+                    <li><a href="/sessions">sessions</a></li>
+                    <li><a href="/tickets">tickets</a></li>
+                    <li><a style="padding-left: 60%;">{{request.user}}</a></li>
+                    <li><a href="/logout">log out</a></li>
+                </ul>
+            </div>
+        </header>
 
         {% block content%}
         {% endblock %}

@@ -7,24 +7,27 @@
         <title>{{tab_title}}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     </head>
-    
+
     <body>
         <nav id="main-header">
             <div class="container">
-                <h1>cinemaDB</h1>
+                <a href="{% url 'page.home' %}">cinemaDB</a>
             </div>
         </nav>
 
         <header id="navbar">
             <div class="container">
-                <h2>welcome</h2>
+                <h2>sign up</h2>
             </div>
         </header>
-        
-        <div style="text-align: center;">
-            <h1> <a href="login">log in</a> or <a href="register">sign up</a> to proceed</h1>
-        </div>
 
+        <div class="container">
+            <form action='', method = "POST", autocomplete="off"> 
+                <br/>
+                {% csrf_token %} 
+                {{form.as_p}}
+                <input type="submit" value="register">
+            </form>
+        </div>
     </body>
 </html>
-
