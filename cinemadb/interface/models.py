@@ -1,5 +1,5 @@
 from django.db import models
-# from cinemadb.settings import AUTH_USER_MODEL
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -29,7 +29,7 @@ class Session(models.Model):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.start
+        return str(self.start)
 
 class Ticket(models.Model):
     price = models.FloatField()
@@ -38,7 +38,7 @@ class Ticket(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.price
+        return str((self.price, self.owner, self.session, self.seat))
 
 class Worker(models.Model):
     name = models.CharField(max_length=50)

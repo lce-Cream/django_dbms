@@ -1,0 +1,33 @@
+{% extends "interface/base.html" %}
+{% block content %}
+
+<div class="container">
+    <form action="/search/halls" method="GET" autocomplete="off">
+        <br/>
+        Id         <input type="number"    name="id"        value="{{id}}">
+        Name       <input type="text"      name="name"      value="{{name}}">
+        Capacity   <input type="number"    name="capacity"  value="{{capacity}}">
+                   <input type="submit"    value="search">
+    </form>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+        </tr>
+        {% for hall in hall_list %}
+        <tr>
+            <td> {{hall.id}} </td>
+            <td> {{hall.name}} </td>
+            <td> {{hall.capacity}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="sidebar">
+    <form action="{% url 'page.add' 'halls' %}">
+        <input type="submit" value="add new"/>
+    </form>
+</div>
+{% endblock content %}

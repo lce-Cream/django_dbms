@@ -1,0 +1,39 @@
+{% extends "interface/base.html" %}
+{% block content %}
+
+<div class="container">
+    <form action="/search/tickets" method="GET" autocomplete="off">
+        <br/>
+        Id        <input type="number"      name="id"       value="{{id}}">
+        Price     <input type="number"      name="price"    value="{{price}}">
+        Seat      <input type="number"      name="seat"     value="{{seat}}">
+        Owner     <input type="text"        name="owner"    value="{{owner}}">
+        Session   <input type="datetime"    name="session"  value="{{session}}">
+                  <input type="submit"      value="search">
+    </form>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Price</th>
+            <th>Seat</th>
+            <th>Owner</th>
+            <th>Session</th>
+        </tr>
+        {% for ticket in ticket_list %}
+        <tr>
+            <td> {{ticket.id}} </td>
+            <td> {{ticket.price}} </td>
+            <td> {{ticket.seat}} </td>
+            <td> {{ticket.owner}} </td>
+            <td> {{ticket.session}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="sidebar">
+    <form action="{% url 'page.add' 'tickets' %}">
+        <input type="submit" value="add new"/>
+    </form>
+</div>
+{% endblock content %}

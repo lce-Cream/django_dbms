@@ -2,13 +2,19 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path(route='', view=home, name='page.home'),
+    path('', view=home, name='page.home'),
     path('register', view=register, name='page.register'),
     path('login', view=login, name='page.login'),
     path('logout', view=logout, name='page.logout'),
+    #tables
     path('movies', view=movies, name='page.movies'),
-    # path('delete/<str:table>/<int:id>/', view=delete, name='lab5.delete'),
-    # path('add', view=add, name='lab5.add'),
-    # path('count', view=count, name='lab5.count'),
-    # path('department', view=department, name='lab5.department'),
+    path('halls', view=halls, name='page.halls'),
+    path('sessions', view=sessions, name='page.sessions'),
+    path('tickets', view=tickets, name='page.tickets'),
+    #edit, delete, add, search
+    path('edit/<str:table>/<int:id>/', view=edit, name='page.edit'),
+    path('delete/<str:table>/<int:id>/', view=delete, name='page.delete'),
+    path('add/<str:table>/', view=add, name='page.add'),
+    path('search/<str:table>/', view=search, name='page.search'),
+
 ]

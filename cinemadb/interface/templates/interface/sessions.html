@@ -1,0 +1,37 @@
+{% extends "interface/base.html" %}
+{% block content %}
+
+<div class="container">
+    <form action="/search/sessions" method="GET" autocomplete="off">
+        <br/>
+        Id      <input type="number"    name="id"     value="{{id}}">
+        Start   <input type="datetime"  name="start"  value="{{start}}">
+        Movie   <input type="text"      name="movie"  value="{{movie}}">
+        Hall    <input type="text"      name="hall"   value="{{hall}}">
+                <input type="submit"    value="search">
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Start</th>
+            <th>Movie</th>
+            <th>Hall</th>
+        </tr>
+        {% for session in session_list %}
+        <tr>
+            <td> {{session.id}} </td>
+            <td> {{session.start}} </td>
+            <td> {{session.movie}} </td>
+            <td> {{session.hall}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="sidebar">
+    <form action="{% url 'page.add' 'sessions' %}">
+        <input type="submit" value="add new"/>
+    </form>
+</div>
+{% endblock content %}
