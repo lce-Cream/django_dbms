@@ -35,6 +35,9 @@ a{
 	overflow:auto;
 }
 
+input[type="number"]{
+	width: 10%;
+}
 
 /* TABLE */
 .table {
@@ -93,4 +96,3 @@ a{
 	font-size:18px;
 	padding-right:15px;
 }
-
