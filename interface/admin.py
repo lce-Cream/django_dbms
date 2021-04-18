@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import *
 
+admin.site.site_header = 'cinemaDB administration'
+admin.site.site_title = 'admin'
+admin.site.index_title = 'cinemaDB'
+
 @admin.register(Movie)
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name', 'duration', 'ganre')

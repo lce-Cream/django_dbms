@@ -67,71 +67,47 @@ def add(request, table):
 @login_required(login_url='page.login')
 def search(request, table):
     def movie_search():
-        id, name, duration, ganre = (request.GET[field] or '' for field in ('id', 'name', 'duration', 'ganre'))
-        movie_list = Movie.objects.all()
-
-        if id:
-            movie_list = movie_list.filter(id=id)
-        elif name:
-            movie_list = movie_list.filter(name__icontains=name)
-        elif duration:
-            movie_list = movie_list.filter(duration__lt=duration)
-        elif ganre:
-            movie_list = movie_list.filter(ganre__icontains=ganre)
+        #it's a bit tricky one I came up with, kwargs are passed in filter if they aren't empty only
+        #thus all this bloated 'if elif' stuff can be avoided, but it still looks kinda messy and repeated
+        id, name, ganre = (request.GET[field] or '' for field in ('id', 'name', 'ganre'))
+        keys = {'id': id, 'name__icontains': name, 'ganre__icontains': ganre}
+        kwargs = {key: value for key, value in keys.items() if value}
+        orderby = request.GET['orderby']
+        movie_list = Movie.objects.filter(**kwargs).order_by(orderby)
 
         return render(request, f'interface/{table}.html',
-        {'movie_list': movie_list, 'id': id, 'name': name, 'duration': duration, 'ganre': ganre})
+        		      {'movie_list': movie_list, 'id': id, 'name': name, 'ganre': ganre, 'orderby': orderby})
 
     def session_search():
         id, start, movie, hall = (request.GET[field] or '' for field in ('id', 'start', 'movie', 'hall'))
-        session_list = Session.objects.all()
+        keys = {'id': id, 'start__lt': start, 'movie__name__icontains': movie, 'hall__name__icontains': hall}
+        kwargs = {key: value for key, value in keys.items() if value}
+        orderby = request.GET['orderby']
+        session_list = Session.objects.filter(**kwargs).order_by(orderby)
 
-        if id:
-            session_list = session_list.filter(id=id)
-        elif start:
-            session_list = session_list.filter(start__lt=start)
-        elif movie:
-            session_list = session_list.filter(movie=movie)
-        elif hall:
-            session_list = session_list.filter(hall=hall)
         return render(request, f'interface/{table}.html',
-        {'session_list': session_list, 'id': id, 'start': start, 'movie': movie, 'hall': hall})
+        			  {'session_list': session_list, 'id': id, 'start': start, 'movie': movie, 'hall': hall, 'orderby': orderby})
 
     def hall_search():
-        id = request.GET['id'] or None
-        name = request.GET['name'] or ''
-        capacity = request.GET['capacity'] or None
-        hall_list = Hall.objects.all()
+        id, name, capacity = (request.GET[field] or '' for field in ('id', 'name', 'capacity'))
+        keys = {'id': id, 'name__icontains': name, 'capacity__lt': capacity}
+        kwargs = {key: value for key, value in keys.items() if value}
+        orderby = request.GET['orderby']
+        hall_list = Hall.objects.filter(**kwargs).order_by(orderby)
 
-        if id:
-            hall_list = hall_list.filter(id=id)
-        elif name:
-            hall_list = hall_list.filter(name__icontains=name)
-        elif capacity:
-            hall_list = hall_list.filter(capacity__lt=capacity)
         return render(request, f'interface/{table}.html',
-        {'hall_list': hall_list, 'id': id, 'name': name, 'capacity': capacity})
+                      {'hall_list': hall_list, 'id': id, 'name': name, 'capacity': capacity, 'orderby': orderby})
 
     def ticket_search():
-        id = request.GET['id'] or None
-        price = request.GET['price'] or None
-        seat = request.GET['seat'] or None
-        owner = request.GET['owner'] or ''
-        session = request.GET['session'] or ''
-        ticket_list = Ticket.objects.all()
+        id, price, seat, owner, session = (request.GET[field] or '' for field in ('id', 'price', 'seat', 'owner', 'session'))
+        keys = {'id': id, 'price__lt': price, 'seat': seat, 'owner__name': owner, 'session': session}
+        kwargs = {key: value for key, value in keys.items() if value}
+        orderby = request.GET['orderby']
+        ticket_list = Ticket.objects.filter(**kwargs).order_by(orderby)
 
-        if id:
-            ticket_list = ticket_list.filter(id=id)
-        elif price:
-            ticket_list = ticket_list.filter(price=price)
-        elif seat:
-            ticket_list = ticket_list.filter(seat=seat)
-        elif owner:
-            ticket_list = ticket_list.filter(owner=owner)
-        elif session:
-            ticket_list = ticket_list.filter(session=session)
         return render(request, f'interface/{table}.html',
-        {'ticket_list': ticket_list, 'id': id, 'price': price, 'seat': seat, 'owner': owner, 'session': session})
+                      {'ticket_list': ticket_list, 'id': id, 'price': price, 'seat': seat, 'owner': owner,
+                       'session': session, 'orderby': orderby})
 
     tables = {'movies': movie_search, 'sessions': session_search, 'halls': hall_search, 'tickets': ticket_search}
     return tables[table]()

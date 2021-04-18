@@ -5,9 +5,21 @@
         <br/>
         Id        <input type="number" name="id"       value="{{id}}">
         Name      <input type="text"   name="name"     value="{{name}}">
-        Duration  <input type="time"   name="duration" value="{{duration}}">
         Ganre     <input type="text"   name="ganre"    value="{{ganre}}">
+
+        Order by  <select name="orderby" id="orderby">
+                    <option value="id">       id</option>
+                    <option value="name">     name</option>
+                    <option value="duration"> duration</option>
+                    <option value="ganre">    ganre</option>
+                  </select>
+
                   <input type="submit" value="search">
+
+        <script>
+            if ('{{orderby}}' == '') document.getElementById('orderby').value = 'id';
+            else document.getElementById('orderby').value = '{{orderby}}';
+        </script>
     </form>
 
     <table class="table">

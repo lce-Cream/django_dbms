@@ -7,8 +7,21 @@
         Id         <input type="number"    name="id"        value="{{id}}">
         Name       <input type="text"      name="name"      value="{{name}}">
         Capacity   <input type="number"    name="capacity"  value="{{capacity}}">
+
+        Order by   <select name="orderby" id="orderby">
+                        <option value="id">id</option>
+                        <option value="name">name</option>
+                        <option value="capacity">capacity</option>
+                   </select>
+
                    <input type="submit"    value="search">
+
+        <script>
+            if ('{{orderby}}' == '') document.getElementById('orderby').value = 'id';
+            else document.getElementById('orderby').value = '{{orderby}}';
+        </script>
     </form>
+
     <table class="table">
         <tr>
             <th>Id</th>
@@ -20,6 +33,8 @@
             <td> {{hall.id}} </td>
             <td> {{hall.name}} </td>
             <td> {{hall.capacity}} </td>
+            <td> <a href="{% url 'page.edit' 'halls' hall.id %}">edit</a> </td>
+            <td> <a href="{% url 'page.delete' 'halls' hall.id %}">delete</a> </td>
         </tr>
         {% endfor %}
     </table>
