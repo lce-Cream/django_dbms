@@ -8,5 +8,5 @@ sessions and tickets. Also there are implemented sort and search options for eve
 
 
   User is able to create profile and log into it. User profiles and some additional hidden from the main interface tables are available under administrator profile.
-<img src="illustrarions/admin.png">
+<img src="illustrations/admin.png">
 <p align="center"> Pic. 2 </p>
